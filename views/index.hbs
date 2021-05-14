@@ -30,9 +30,11 @@
           <div class="record-amount ms-auto mx-3">
             {{this.amount}}
           </div>
-          <div class="record-edit">
-            <a href="/records/{{this._id}}/edit" class="btn btn-warning">編輯</a>
-            <a href="" class="btn btn-danger">刪除</a>
+          <div class="record-edit d-flex">
+            <a href="/records/{{this._id}}/edit" class="btn btn-warning mx-1">編輯</a>
+            <form action="/records/{{this._id}}?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-danger mx-1">刪除</button>
+            </form>
           </div>
         </div>
       </li>

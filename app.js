@@ -2,8 +2,8 @@ const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require("express-handlebars")
 const bodyParser = require('body-parser')
+const methodOverride = require('method-override')
 const Record = require('./models/record')
-const record = require('./models/record')
 
 const app = express()
 const port = 3000
@@ -29,12 +29,15 @@ app.set('view engine', 'hbs')
 // set body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
 
+// set method-override
+app.use(methodOverride('_method'))
+
 // setting route
 app.get('/', (req, res) => {
   Record.find()
     .lean()
     .sort({ date: 'desc' })
-    .then((records) => res.render('index', { records }))
+    .then(records => res.render('index', { records }))
     .catch(error => console.error(error))
 })
 
@@ -56,6 +59,27 @@ app.get('/records/:id/edit', (req, res) => {
     .catch(error => console.error(error))
 })
 
+// edit records
+app.put('/records/:id', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .then((record) => {
+      record = Object.assign(record, req.body)
+      return record.save()
+    })
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
+  
+})
+
+// delete records
+app.delete('/records/:id', (req, res) => {
+  const id = req.params.id
+  return Record.findById(id)
+    .then(record => record.remove())
+    .then(() => res.redirect('/'))
+    .catch(error => console.error(error))
+})
 app.listen(port, () =>{
   console.log(`app is running on localhost:${port}`)
 })
