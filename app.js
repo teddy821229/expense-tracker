@@ -1,8 +1,9 @@
 const express = require('express')
-const app = express()
 const mongoose = require('mongoose')
 const exphbs = require("express-handlebars")
+const Record = require('./models/record')
 
+const app = express()
 const port = 3000
 
 // db connection
@@ -21,9 +22,13 @@ app.use(express.static('public'))
 // set view engine
 app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs'}))
 app.set('view engine', 'hbs')
-
+// setting route
 app.get('/', (req, res) => {
-  res.render('index')
+  Record.find()
+    .lean()
+    .sort({ date: 'desc' })
+    .then((records) => res.render('index', { records }))
+    .catch(error => console.error(error))
 })
 
 
