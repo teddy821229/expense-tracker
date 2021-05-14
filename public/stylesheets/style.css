@@ -5,3 +5,7 @@
 #create-new-button {
   width: 200px;
 }
+
+#add-new-card {
+  max-width: 600px;
+}

@@ -1,0 +1,47 @@
+<div class="container">
+  <div class="card my-5 mx-auto" id="add-new-card">
+    <h2 class="card-title text-center mt-5">新增消費</h2>
+    <form id="new-record-form" class="mx-5" action="/records/new" method="POST" onsubmit="return checkValidity()" novalidate>
+
+      <div class="my-3">
+        <label for="record-name" class="form-label">消費名稱*</label>
+        <input type="text" class="form-control" id="record-name" name="name" required>
+      </div>
+
+      <div class="my-3">
+        <label for="record-category" class="form-label">消費類別*</label>
+        <select class="form-control" id="record-category" name="category" required>
+          <option value="" selected disabled>請選擇</option>
+          <option value="family">家居業務</option>
+          <option value="travel">交通出行</option>
+          <option value="entertainment">休閒娛樂</option>
+          <option value="food">餐飲食品</option>
+          <option value="other">其他</option>
+        </select>
+      </div>
+
+      <div class="my-3">
+        <label for="record-date" class="form-label">消費日期*</label>
+        <input type="text" class="form-control" id="record-date" name="date" required>
+      </div>
+
+      <div class="my-3">
+        <label for="record-amount" class="form-label">消費金額*</label>
+        <input type="string" class="form-control" id="record-amount" name="amount" required>
+      </div>
+
+      <div class="container d-flex justify-content-center">
+        <button type="submit" class="btn btn-primary m-3" id="submit-button">新增</button>
+        <a href="/" class="btn btn-light m-3">取消新增</a>
+      </div>
+    </form>
+
+    <script type="text/javascript">
+      const form = document.querySelector('#new-record-form')
+      const submitButton = document.querySelector("#submit-button")
+      submitButton.addEventListener('click',  function onButtonClicked(event) {
+        form.classList.add('was-validated')
+      })
+    </script>
+  </div>
+</div>
