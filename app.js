@@ -12,7 +12,7 @@ require('./config/mongoose')
 // 設定自定義參數
 const app = express()
 const multihelpers = hbsHelper()
-const port = 3000
+const PORT = process.env.PORT || 3000
 
 // 設定靜態檔案
 app.use(express.static('public'))
@@ -31,8 +31,8 @@ app.use(methodOverride('_method'))
 app.use(routes)
 
 // listening and start running
-app.listen(port, () =>{
-  console.log(`app is running on localhost:${port}`)
+app.listen(PORT, () =>{
+  console.log(`app is running on localhost:${PORT}`)
 })
 
 
