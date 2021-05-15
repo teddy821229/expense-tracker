@@ -40,7 +40,19 @@ app.get('/', (req, res) => {
     .then(records => res.render('index', { records }))
     .catch(error => console.error(error))
 })
+// set filter page
+app.get('/filter', (req, res) => {
+  const category = req.query.category
+  return Record.find({
+    category: { $regex: `${ category }` } 
+  })
+    .lean()
+    .then(records => res.render('index', { records }))
+    .catch(error => console.error(error))
 
+})
+
+// set add new page
 app.get('/records/new', (req, res) => {
   res.render('new')
 })

@@ -1,16 +1,20 @@
 
 <div class="container my-5" id="record-block">
   <div class="container my-3" id="record-amount"> 
-    <h1 class="text-center">amount: <span style="color:pink">1000</span></h1>
+    <h1 class="text-center">總花費: <span style="color:pink">1000</span></h1>
   </div>
 
   <div class="container my-3" id="record-filter">
-    <select class="form-select" aria-label="Default select example">
-      <option selected>Open this select menu</option>
-      <option value="1">One</option>
-      <option value="2">Two</option>
-      <option value="3">Three</option>
-    </select>
+    <form action="/filter" method="GET">
+      <select class="form-select" aria-label="Default select example" onchange="this.form.submit()" name="category">
+        <option selected disabled>請選擇篩選項目</option>
+        <option value="family">家居業務</option>
+        <option value="travel">交通出行</option>
+        <option value="entertainment">休閒娛樂</option>
+        <option value="food">餐飲食品</option>
+        <option value="other">其他</option>
+      </select>
+    </form>
   </div>
 
   <div class="container my-3">
