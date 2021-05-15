@@ -7,6 +7,7 @@ const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const Record = require('./models/record')
 const Category = require('./models/category')
+const category = require('./models/category')
 
 const app = express()
 const port = 3000
@@ -37,20 +38,49 @@ app.use(methodOverride('_method'))
 
 // setting route
 app.get('/', (req, res) => {
+  let totalAmount = 0
   Record.find()
     .lean()
     .sort({ date: 'desc' })
-    .then(records => res.render('index', { records }))
+    .then(records => {
+      records.forEach(record => totalAmount += record.amount)
+      Category.find()
+        .lean()
+        .then(categories => {
+          records.forEach(record => {
+            let categoryMatch = categories.filter(category => {
+              return category.category === record.category
+            })
+            record.categoryImage = categoryMatch[0].image
+          })
+          res.render('index', { records, totalAmount })
+        })
+    })
     .catch(error => console.error(error))
 })
 // set filter page
 app.get('/filter', (req, res) => {
   const categorySelected = req.query.category
+  let totalAmount = 0
   return Record.find({
     category: { $regex: `${ categorySelected }` } 
   })
     .lean()
-    .then(records => res.render('index', { records, categorySelected }))
+    .then(records => {
+      records.forEach(record => totalAmount += record.amount)
+      Category.find()
+        .lean()
+        .then(categories => {
+          records.forEach(record => {
+            let categoryMatch = categories.filter(category => {
+              return category.category === record.category
+            })
+            record.categoryImage = categoryMatch[0].image
+          })
+          res.render('index', { records, categorySelected, totalAmount })
+        })
+      
+    })
     .catch(error => console.error(error))
 })
 

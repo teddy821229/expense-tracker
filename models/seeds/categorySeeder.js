@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Category = require('../category')
+const dummyCategory = require('../dummy/dummyCategory')
 
 mongoose.connect('mongodb://localhost/expense-data', { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -11,26 +12,7 @@ db.on('error', () => {
 
 db.once('open', () =>{
   console.log('mongodb CONNECTED')
-  Category.create({
-    category: 'family',
-    image: 'fas fa-home'
-  },
-  {
-    category: 'travel',
-    image: 'fas fa-shuttle-van'
-  },
-  {
-    category: 'entertainment',
-    image: 'fas fa-grin-beam'
-  },
-  {
-    category: 'food',
-    image: 'fas fa-utensils'
-  },
-  {
-    category: 'other',
-    image: 'fas fa-pen'
-  })
+  Category.create(dummyCategory)
     .then(() => {
       console.log('data is generated successfully.')
       return db.close()

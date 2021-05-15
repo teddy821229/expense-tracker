@@ -1,5 +1,6 @@
 const mongoose = require('mongoose')
 const Record = require('../record')
+const dummyRecord = require('../dummy/dummyRecord')
 
 mongoose.connect('mongodb://localhost/expense-data', { useNewUrlParser: true, useUnifiedTopology: true })
 
@@ -9,15 +10,15 @@ db.on('error', () => {
   console.log('mongodb ERROR')
 })
 
-db.once('open', () =>{
+db.once('open', () => {
   console.log('mongodb CONNECTED')
-  for (let i = 0; i < 10; i++) {
-    Record.create({
-      name:`expense-${i}`,
-      category:'eat',
-      date:`2021/05/${i}`,
-      amount:`${i * 50}`,
+  Record.create(dummyRecord)
+    .then(() => {
+      console.log('data is generated successfully.')
+      db.close()
     })
-  }
-  console.log('data is generated successfully.')
+    .then(() => {
+      console.log('database connection is closed.')
+    })
+    .catch(error => console.error(error))
 })
