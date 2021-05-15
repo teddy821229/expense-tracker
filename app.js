@@ -1,9 +1,12 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const exphbs = require("express-handlebars")
+const hbsHelper = require('handlebars-helpers')
+const multihelpers = hbsHelper()
 const bodyParser = require('body-parser')
 const methodOverride = require('method-override')
 const Record = require('./models/record')
+const Category = require('./models/category')
 
 const app = express()
 const port = 3000
@@ -23,7 +26,7 @@ db.once('open', () =>{
 app.use(express.static('public'))
 
 // set view engine
-app.engine('hbs', exphbs({ defaultLayout: 'main', extname: '.hbs'}))
+app.engine('hbs', exphbs({ helpers: multihelpers, defaultLayout: 'main', extname: '.hbs'}))
 app.set('view engine', 'hbs')
 
 // set body-parser
@@ -42,14 +45,13 @@ app.get('/', (req, res) => {
 })
 // set filter page
 app.get('/filter', (req, res) => {
-  const category = req.query.category
+  const categorySelected = req.query.category
   return Record.find({
-    category: { $regex: `${ category }` } 
+    category: { $regex: `${ categorySelected }` } 
   })
     .lean()
-    .then(records => res.render('index', { records }))
+    .then(records => res.render('index', { records, categorySelected }))
     .catch(error => console.error(error))
-
 })
 
 // set add new page

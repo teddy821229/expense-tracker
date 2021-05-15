@@ -11,12 +11,12 @@
       <div class="my-3">
         <label for="record-category" class="form-label">消費類別*</label>
         <select class="form-control" id="record-category" name="category" required>
-          <option value="" selected disabled>請選擇</option>
-          <option value="family">家居業務</option>
-          <option value="travel">交通出行</option>
-          <option value="entertainment">休閒娛樂</option>
-          <option value="food">餐飲食品</option>
-          <option value="other">其他</option>
+          <option value="" disabled>請選擇</option>
+          <option value="family" {{#is record.category 'family'}} selected {{/is}}>家居業務</option>
+          <option value="travel" {{#is record.category 'travel'}} selected {{/is}}> 交通出行</option>
+          <option value="entertainment" {{#is record.category 'entertainment'}} selected {{/is}}>休閒娛樂</option>
+          <option value="food" {{#is record.category 'food'}} selected {{/is}}>餐飲食品</option>
+          <option value="other" {{#is record.category 'other'}} selected {{/is}}>其他</option>
         </select>
       </div>
 
