@@ -1,10 +1,8 @@
 const mongoose = require('mongoose')
 const Record = require('../record')
+const db = require('../../config/mongoose')
 const dummyRecord = require('../dummy/dummyRecord')
 
-mongoose.connect('mongodb://localhost/expense-data', { useNewUrlParser: true, useUnifiedTopology: true })
-
-const db = mongoose.connection
 
 db.on('error', () => {
   console.log('mongodb ERROR')

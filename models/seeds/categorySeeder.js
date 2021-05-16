@@ -1,10 +1,7 @@
 const mongoose = require('mongoose')
 const Category = require('../category')
+const db = require('../../config/mongoose')
 const dummyCategory = require('../dummy/dummyCategory')
-
-mongoose.connect('mongodb://localhost/expense-data', { useNewUrlParser: true, useUnifiedTopology: true })
-
-const db = mongoose.connection
 
 db.on('error', () => {
   console.log('mongodb ERROR')
