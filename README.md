@@ -1,6 +1,9 @@
 # 老爸的私房錢
 個人專屬記帳程式
 
+![image](https://github.com/teddy821229/expense-tracker/blob/main/image/%E9%A6%96%E9%A0%81%E7%95%AB%E9%9D%A2.png)
+![image](https://github.com/teddy821229/expense-tracker/blob/main/image/%E6%96%B0%E5%A2%9E%E9%A0%81%E9%9D%A2.png)
+
 
 ## 功能
 
