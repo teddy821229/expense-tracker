@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Record = require('../record')
 const db = require('../../config/mongoose')
-const dummyRecord = require('../dummy/dummyRecord')
+const dummyRecord = require('../dummy/dummyRecord.json')
 
 
 db.on('error', () => {

@@ -1,7 +1,8 @@
 const mongoose = require('mongoose')
 const Category = require('../category')
 const db = require('../../config/mongoose')
-const dummyCategory = require('../dummy/dummyCategory')
+// const dummyCategory = require('../dummy/dummyCategory')
+const dummyCategory = require('../dummy/dummyCategory.json')
 
 db.on('error', () => {
   console.log('mongodb ERROR')
