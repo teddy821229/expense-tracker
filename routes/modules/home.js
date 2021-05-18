@@ -30,6 +30,14 @@ router.get('/', (req, res) => {
 router.get('/filter', (req, res) => {
   const categorySelected = req.query.category
   let totalAmount = 0
+  if (categorySelected === 'all') {
+    return Record.find()
+      .lean()
+      .sort({ date: 'desc' })
+      .then(() => res.redirect('/'))
+      .catch(error => console.error(error))
+  }
+  
   return Record.find({
     category: { $regex: `${ categorySelected }` } 
   })

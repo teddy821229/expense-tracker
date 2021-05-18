@@ -1,19 +1,26 @@
 
 <div class="container my-5" id="record-block">
-  <div class="container my-3" id="record-amount"> 
+  <div class="container my-5" id="record-amount"> 
     <h1 class="text-center">總花費: <span style="color:pink">{{totalAmount}} </span></h1>
   </div>
 
-  <div class="container my-3" id="record-filter">
+  <div class="container mb-4 align-items-center" id="record-filter">
     <form action="/filter" method="GET">
-      <select class="form-select" aria-label="Default select example" onchange="this.form.submit()" name="category">
-        <option disabled selected>請選擇篩選項目</option>
-        <option value="family" {{#is categorySelected 'family'}} selected {{/is}} >家居業務</option>
-        <option value="travel" {{#is categorySelected 'travel'}} selected {{/is}} >交通出行</option>
-        <option value="entertainment" {{#is categorySelected 'entertainment'}} selected {{/is}} >休閒娛樂</option>
-        <option value="food" {{#is categorySelected 'food'}} selected {{/is}} >餐飲食品</option>
-        <option value="other" {{#is categorySelected 'other'}} selected {{/is}} >其他</option>
-      </select>
+      <div class="row">
+        <div class="col-auto my-1">
+          <label for="filterSelect" class="form-label">請選擇篩選項目：</label>
+        </div>
+        <div class="col">
+          <select class="form-select" aria-label="Default select example" onchange="this.form.submit()" name="category" id="filterSelect">
+            <option value="all" selected>全部</option>
+            <option value="family" {{#is categorySelected 'family'}} selected {{/is}} >家居業務</option>
+            <option value="travel" {{#is categorySelected 'travel'}} selected {{/is}} >交通出行</option>
+            <option value="entertainment" {{#is categorySelected 'entertainment'}} selected {{/is}} >休閒娛樂</option>
+            <option value="food" {{#is categorySelected 'food'}} selected {{/is}} >餐飲食品</option>
+            <option value="other" {{#is categorySelected 'other'}} selected {{/is}} >其他</option>
+          </select>
+        </div>
+      </div>
     </form>
   </div>
 
