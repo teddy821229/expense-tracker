@@ -16,10 +16,8 @@ router.get('/', (req, res) => {
         .lean()
         .then(categories => {
           records.forEach(record => {
-            let categoryMatch = categories.filter(category => {
-              return category.category === record.category
-            })
-            record.categoryImage = categoryMatch[0].image
+            let categoryMatch = categories.find(category => category.category === record.category)
+            record.categoryImage = categoryMatch.image
           })
           res.render('index', { records, totalAmount })
         })
@@ -37,7 +35,7 @@ router.get('/filter', (req, res) => {
       .then(() => res.redirect('/'))
       .catch(error => console.error(error))
   }
-  
+
   return Record.find({
     category: { $regex: `${ categorySelected }` } 
   })
@@ -49,10 +47,8 @@ router.get('/filter', (req, res) => {
         .lean()
         .then(categories => {
           records.forEach(record => {
-            let categoryMatch = categories.filter(category => {
-              return category.category === record.category
-            })
-            record.categoryImage = categoryMatch[0].image
+            let categoryMatch = categories.find(category => category.category === record.category)
+            record.categoryImage = categoryMatch.image
           })
           res.render('index', { records, categorySelected, totalAmount })
         })

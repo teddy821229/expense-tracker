@@ -1,11 +1,13 @@
 <div class="container">
   <div class="card my-5 mx-auto" id="add-new-card">
-    <h2 class="card-title text-center mt-5">新增消費</h2>
+    <h2 class="card-title text-center mt-5">修改消費明細</h2>
     <form id="new-record-form" class="mx-5" action="/records/{{record._id}}?_method=PUT" method="POST" onsubmit="return checkValidity()" novalidate>
 
       <div class="my-3">
         <label for="record-name" class="form-label">消費名稱*</label>
         <input type="text" class="form-control" id="record-name" name="name" value="{{record.name}}" required>
+        <div class="valid-feedback">OK!</div>
+        <div class="invalid-feedback">請輸入正確的名稱</div>
       </div>
 
       <div class="my-3">
@@ -18,16 +20,23 @@
           <option value="food" {{#is record.category 'food'}} selected {{/is}}>餐飲食品</option>
           <option value="other" {{#is record.category 'other'}} selected {{/is}}>其他</option>
         </select>
+        <div class="valid-feedback">OK!</div>
+        <div class="invalid-feedback">請選擇正確的類別</div>
       </div>
 
       <div class="my-3">
         <label for="record-date" class="form-label">消費日期*</label>
-        <input type="text" class="form-control" id="record-date" name="date" value="{{record.date}}" required>
+        <input type="date" class="form-control" id="record-date" name="date" value="{{record.date}}" required>
+        <div id="dateHelp" class="form-text">點選右邊日曆形狀的圖樣可以選擇日期</div>
+        <div class="valid-feedback">OK!</div>
+        <div class="invalid-feedback">請選擇正確的日期</div>
       </div>
 
       <div class="my-3">
         <label for="record-amount" class="form-label">消費金額*</label>
-        <input type="string" class="form-control" id="record-amount" name="amount" value="{{record.amount}}" required>
+        <input type="number" class="form-control" id="record-amount" name="amount" value="{{record.amount}}" required>
+        <div class="valid-feedback">OK!</div>
+        <div class="invalid-feedback">請輸入正確金額</div>
       </div>
 
       <div class="container d-flex justify-content-center">
